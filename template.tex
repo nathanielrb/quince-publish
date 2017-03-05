@@ -1,0 +1,193 @@
+\documentclass[oneside]{memoir}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[tracking=true]{microtype}
+
+\usepackage{xcolor, marginnote, xparse, graphicx, caption, verse}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[hang,flushmargin]{footmisc} 
+
+\usepackage{ucs}
+
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+% \renewcommand*\familydefault{\sfdefault} 
+
+\frenchspacing
+
+
+% This rule will take exactly \baselinskip space, maintaining the grid. The
+% raise value is the height above the next baseline. It will extend down
+% thickness.
+% \trule[thickness][raise]
+\NewDocumentCommand\trule{O{0.4pt}O{0pt}}{
+  \vskip0pt\vtop to0pt{
+    \noindent\raisebox{#2}{\vbox{\leavevmode\hrule height#1}}}
+}
+
+
+%% Font Sizes
+
+\makeatletter %only needed in preamble
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{18pt}}
+\renewcommand\Large{\@setfontsize\Large{13pt}{18}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{8pt}{11}}
+\makeatother
+
+
+% Bringhurst layout
+
+\settypeblocksize{565.32431pt}{406pt}{1.25}
+
+\makechapterstyle{Bringhurst}{%
+  \chapterstyle{default}
+  \setsecnumdepth{subsection}
+  \renewcommand{\chaptitlefont}
+               {%\fontfamily{qcr}\selectfont
+               \raggedleft
+                \normalfont
+                \itshape
+                \large}
+  \renewcommand*{\printchaptername}{}
+   \renewcommand*{\chapternamenum}{}
+  \renewcommand*{\printchapternum}{%
+  \marginnote{\chapnumfont \color{myred}}[0\baselineskip]
+  }%
+  \renewcommand*{\afterchapternum}{}
+    \renewcommand*{\printchaptertitle}[1]{
+    \chaptitlefont##1}
+%  \renewcommand*{\afterchaptertitle}{\vspace{38pt}\hrule\vspace{10.5pt}} % 10.5+18-1pt for trule width
+
+\headheight18pt
+\headsep23.5pt
+
+\beforechapskip50pt
+\baselineskip18pt
+\topskip0pt
+\afterchapskip10.5pt
+
+  \setsecindent{0pt}
+  \setbeforesecskip{0pt}
+  \setaftersecskip{18pt}
+  \setsecheadstyle{
+  		\clearpage
+        \scshape
+        \raggedright
+  }
+
+  \setaftersubsecskip{18pt}
+  \setbeforesubsecskip{2.5pt}
+  \setsubsecindent{0pt}
+  \setsubsecheadstyle{
+%  		\clearpage
+        \normalfont
+        \itshape
+        \raggedright
+  }
+  
+
+
+\setlength\parindent{-0em}
+
+\setlength{\parskip}{18pt}
+
+% \linespread{1.24}
+
+\topmargin18pt
+\oddsidemargin40pt
+%\evensidemargin0pt
+	
+% footnotes as sidenotes
+
+\renewcommand{\footnote}{\sidefootnote}
+
+% \setsidefeet{ hhsepi }{ hwidthi }{ hvsepi }{ hadji }{ hfonti }{ hheighti }
+
+\setsidefeet{10.5pt}{95.5pt}%
+{\onelineskip}{0pt}%
+{\normalfont\footnotesize}{\textheight}%
+
+
+\makeevenhead{headings}{}{}{\thepage} 
+\makeoddhead{headings}{}{}{\thepage}
+
+
+}
+
+
+
+\frenchspacing
+
+\chapterstyle{Bringhurst}
+
+
+% Poem
+
+\renewcommand{\PoemTitleheadstart}{\clearpage}
+
+\renewcommand{\PoemTitlefont}{\centering\scshape}
+
+\vleftmargin0em
+
+% cheating ;-)
+%  \renewcommand{\section}{\PoemTitle*}
+
+% Chapter numbers (?)
+
+\addtopsmarks{headings}{}{
+  \createmark{chapter}{left}{nonumber}{}{}
+}
+\pagestyle{headings} % activate changes
+
+
+
+%% My Settings
+
+\definecolor{myred}{HTML}{ab0024}
+
+
+\widowpenalty=5000
+ \clubpenalty=5000 
+ 
+ \lefthyphenmin4
+\righthyphenmin4
+
+\captionsetup{labelformat=empty}
+
+
+
+\renewcommand{\PoemTitlefont}{%
+\normalfont\large\itshape}
+
+\beforePoemTitleskip0pt
+\midPoemTitleskip0pt
+\afterPoemTitleskip0pt
+
+ 
+\let\oldsubsection\subsection
+\renewcommand\subsection{\znewpage\oldsubsection}
+
+\let\oldsection\section
+\renewcommand\section{\clearpage\gdef\znewpage{\global\let\znewpage\clearpage}\oldsection}
+
+\global\let\znewpage\clearpage
+
+%\renewcommand*\section\PoemTitle
+
+% Document
+
+\begin{document}
+
+
+
+$body$
+
+%$if(alignment)$
+\end{$alignment$}
+$endif$
+
+
+\end{document}
